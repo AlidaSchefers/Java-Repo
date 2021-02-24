@@ -11,8 +11,9 @@ public class Main {
             //if div by both 3 and 5, print PopCrackle
             //if not div by 3 or 5, print number.
         System.out.print("Number: ");
-        Scanner scanner = new Scanner(System.in);
-        int num = scanner.nextInt();
+        int num = new Scanner(System.in).nextInt();
+        // Scanner scanner = new Scanner(System.in);
+        // int num = scanner.nextInt();
         if (num % 3 == 0)
             System.out.print("Pop"); //use print so PopCrackle is not divided and separated by a line
         if (num % 5 == 0)
