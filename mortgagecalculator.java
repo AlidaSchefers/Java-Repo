@@ -13,7 +13,7 @@ public class Main {
         double mortgage = calculateMortgage(principal, yearlyInterest, periodYears);
 
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.print(mortgageFormatted);
+        System.out.print("Mortgage: " + mortgageFormatted);
     }
 
     public static double readNumber(String prompt, double min, double max) {
@@ -21,7 +21,7 @@ public class Main {
         double value;
         while (true) {
             System.out.print(prompt);
-            value = scanner.nextInt();
+            value = scanner.nextDouble();
             if (value >= min || value <= max)
                 break;
             System.out.println("Enter a number between " + min + " and " + max + ".");
