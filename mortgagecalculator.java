@@ -23,12 +23,8 @@ public class Main {
                 "\n"+
                 "----------------");
 
-        short numPaymentsPaid = 0;
-        short totalPayments = (short)calcPeriodMonths(periodYears);
-        while(numPaymentsPaid <= totalPayments) {
-            System.out.println(NumberFormat.getCurrencyInstance().format(calcRemainingBalance(principal, yearlyInterest, periodYears, numPaymentsPaid)));
-            numPaymentsPaid++; //one more than the totalNumOfPayments on the last iteration. Does not matter for the purpose of printing out the remaining balance, though.
-        }
+        for (short month = 0; month <= periodYears * MONTHS_IN_YEAR; month++)
+            System.out.println(NumberFormat.getCurrencyInstance().format(calcRemainingBalance(principal, yearlyInterest, periodYears, month)));
     }
 
     public static double readNumber(String prompt, int min, int max) {
