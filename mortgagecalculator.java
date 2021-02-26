@@ -12,17 +12,19 @@ public class Main {
         float yearlyInterest = (float)readNumber("Annual Interest Rate: ", 1, 30);
         byte periodYears = (byte)readNumber("Period (Years): ", 1,30);
 
+        printMortgage(principal, yearlyInterest, periodYears);
+        printPaymentSchedule(principal, yearlyInterest, periodYears);
+    }
+
+    private static void printMortgage(int principal, float yearlyInterest, byte periodYears) {
         double mortgage = calculateMortgage(principal, yearlyInterest, periodYears);
-
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println("MORTGAGE"+ "\n"+ "--------");
+        System.out.println("MORTGAGE"+"\n"+"--------");
         System.out.println("Monthly Payments: " + mortgageFormatted);
-        System.out.println(
-                "\n"+
-                "PAYMENT SCHEDULE"+
-                "\n"+
-                "----------------");
+    }
 
+    private static void printPaymentSchedule(int principal, float yearlyInterest, byte periodYears) {
+        System.out.println("\n"+"PAYMENT SCHEDULE"+"\n"+"----------------");
         for (short month = 0; month <= periodYears * MONTHS_IN_YEAR; month++)
             System.out.println(NumberFormat.getCurrencyInstance().format(calcRemainingBalance(principal, yearlyInterest, periodYears, month)));
     }
@@ -42,7 +44,7 @@ public class Main {
 
     public static double calculateMortgage(int principal, double yearlyInterest, byte periodYears) {
         double monthlyInterestPercent = calcMonthlyInterest(yearlyInterest);
-        short periodMonths = (short)calcPeriodMonths(periodYears);
+        short periodMonths = (short)(periodYears * MONTHS_IN_YEAR);
 
         double mortgage = principal * (
                 (monthlyInterestPercent * Math.pow(1 + monthlyInterestPercent, periodMonths))
@@ -55,12 +57,8 @@ public class Main {
         return (yearlyInterest / PERCENT) / MONTHS_IN_YEAR;
     };
 
-    public static int calcPeriodMonths(byte periodYears) {
-        return periodYears * MONTHS_IN_YEAR;
-    }
-
     public static double calcRemainingBalance(int principal, double yearlyInterest, byte periodYears, int numPaymentsPaid) {
-        short totalNumOfPayments = (short)calcPeriodMonths(periodYears);
+        short totalNumOfPayments = (short)(periodYears * MONTHS_IN_YEAR);
         double monthlyInterestPercent = calcMonthlyInterest(yearlyInterest);
         double remainingBalance =
                 (principal * (
